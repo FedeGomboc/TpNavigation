@@ -1,17 +1,24 @@
-import React from "react";
-import {StyleSheet, Text, View, Image} from "react-native";
-import Constants from "expo-constants";
+import { View, Text, StyleSheet } from 'react-native'
+import React from 'react'
+import Menu from '../components/Menu';
 
-const BlueScreen = () => {
+export default function BlueScreen() {
+  return (
     <View style={styles.container}>
-        <Text>Blue Screen</Text>
+      <Text style={styles.text}>Blue Screen</Text>
+      <Menu/>
     </View>
+  )
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "blue"
+      flex: 1,
+      backgroundColor: 'blue',
+      alignItems: 'center', //Centro del eje X
+      justifyContent: 'center', //Centro del eje Y
+    }, 
+    text: {
+      color: "white",
     }
-})
-
-export default BlueScreen
+  });
