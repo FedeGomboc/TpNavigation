@@ -9,16 +9,16 @@ export default function Menu() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("GreenScreen")}>
-        <Text style={styles.verde}>Green</Text>
+      <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("BlueScreen")}>
+        <Text style={styles.azul}>Blue</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("RedScreen")}>
         <Text style={styles.rojo}>Red</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("BlueScreen")}>
-        <Text style={styles.azul}>Blue</Text>
+      <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate("GreenScreen")}>
+        <Text style={styles.verde}>Green</Text>
       </TouchableOpacity>
     </View>
   );
