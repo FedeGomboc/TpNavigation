@@ -3,8 +3,20 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 
 export default function Boton({ onPress, style, titulo }) {
+
+  let today = new Date()
+  let now = today.toLocaleString()
+
+  const handleOnPress = () => {
+    console.log(now)
+
+    if (typeof onPress === "function"){
+      onPress()
+    }
+  }
+
   return (
-    <TouchableOpacity style={[styles.boton, style]} onPress={onPress}>
+    <TouchableOpacity style={[styles.boton, style]} onPress={handleOnPress}>
       <Text style={styles.text}>{titulo}</Text>
     </TouchableOpacity>
   );
