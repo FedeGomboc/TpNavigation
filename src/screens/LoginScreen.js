@@ -27,8 +27,8 @@ export default function LoginScreen() {
   
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} placeholder="Usuario" onChangeText={setUsuario} value={usuario}></TextInput>
-      <TextInput style={styles.input} placeholder="Contraseña" onChangeText={setContrasena} value={contrasena}></TextInput>
+      <TextInput style={styles.input} placeholder="Usuario" onChangeText={setUsuario} value={usuario} returnKeyType='next/>
+      <TextInput style={styles.input} placeholder="Contraseña" onChangeText={setContrasena} value={contrasena}/>
 
       <Boton titulo="Login" onPress={Login}/>
     </View>
