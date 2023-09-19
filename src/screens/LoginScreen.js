@@ -1,36 +1,55 @@
 import { View, Text, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { TextInput } from "react-native";
 import Menu from "../components/Menu";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import  Boton from "../components/Boton";
-
+import Boton from "../components/Boton";
 
 export default function LoginScreen() {
-
-  const [usuario, setUsuario] = useState("")
-  const [contrasena, setContrasena] = useState("")
+  const [usuario, setUsuario] = useState("");
+  const [contrasena, setContrasena] = useState("");
 
   const navigation = useNavigation();
+  const passwordRef = useRef();
 
   const Login = () => {
-    if (usuario.toLowerCase() == "federico" && contrasena.toLowerCase() == "gomboc"){
-      navigation.navigate("BlueScreen")
-      setUsuario("")
-      setContrasena("")
+    if (usuario !== "" && contrasena !== "") {
+      if (usuario.toLowerCase() == "federico" && contrasena.toLowerCase() == "gomboc") {
+        navigation.navigate("BlueScreen");
+        setUsuario("");
+        setContrasena("");
+      } else {
+        alert("Usuario o contraseña incorrectos");
+      }
+    } else {
+      alert("Es necesario completar todos los datos");
     }
-    else {
-      alert("Usuario o contraseña incorrectos")
-    }
-  }
-  
+  };
+
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} placeholder="Usuario" onChangeText={setUsuario} value={usuario} returnKeyType='next/>
-      <TextInput style={styles.input} placeholder="Contraseña" onChangeText={setContrasena} value={contrasena}/>
+      <TextInput
+        style={styles.input}
+        placeholder="Usuario"
+        onChangeText={setUsuario}
+        value={usuario}
+        returnKeyType="next"
+        blurOnSubmit={false}
+        onSubmitEditing={() => {
+          passwordRef.current.focus();
+        }}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Contraseña"
+        onChangeText={setContrasena}
+        value={contrasena}
+        ref={passwordRef}
+        secureTextEntry
+      />
 
-      <Boton titulo="Login" onPress={Login}/>
+      <Boton titulo="Login" onPress={Login} />
     </View>
   );
 }
@@ -50,7 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     position: "absolute",
-    bottom: 350,  
+    bottom: 350,
   },
   boton: {
     width: "33%",
@@ -61,6 +80,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   verde: {
-    color: "green"
+    color: "green",
   },
 });
