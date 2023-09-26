@@ -21,20 +21,52 @@ class UsuarioService {
 
   static automaticLogin = async () => {
     //Obtiene las credenciales almacenadas e intenta loguearse
-    let isValid = false;
-    return isValid;
+    try{
+      const valorUsuario = await AsyncStorage.getItem(USERNAME_KEY);
+      const valorContrasena = await AsyncStorage.getItem(PASSWORD_KEY);
+      let isValid
+
+      if (valorUsuario !== null && valorContrasena !== null){
+        isValid = this.login()
+      }
+      else {
+        return false
+      }
+
+      return isValid
+
+    } catch (error) { 
+      return false
+    }
   };
 
   static eliminarCredenciales = async () => {
     //Elimina las credenciales almacenadas al cerrar sesión
+    try {
+      await AsyncStorage.removeItem(USERNAME_KEY)
+      await AsyncStorage.removeItem(PASSWORD_KEY)
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   static almacenarCredenciales = async (username, password) => {
     //Almacena las credenciales en AsyncStorage (para leerlas al iniciar la proxima vez)
+    try {
+      await AsyncStorage.setItem(USERNAME_KEY, username);
+      await AsyncStorage.setItem(PASSWORD_KEY, password);
+    } catch (error) {
+      // Error saving data
+      console.log(error)
+    }
   };
 
   static obtenerCredenciales = async () => {
-    const returnValue = { Username: storedUsername, Password: storedPassword };
+
+    const valorUsuario = await AsyncStorage.getItem(USERNAME_KEY);
+    const valorContrasena = await AsyncStorage.getItem(PASSWORD_KEY);
+
+    const returnValue = { "username": valorUsuario, "password": valorContrasena };
     return returnValue;
   };
 }
