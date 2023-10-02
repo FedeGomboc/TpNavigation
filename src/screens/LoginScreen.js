@@ -5,6 +5,7 @@ import Menu from "../components/Menu";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Boton from "../components/Boton";
+import UsuarioService from "../services/UsuarioService";
 
 export default function LoginScreen() {
   const [usuario, setUsuario] = useState("");
@@ -13,12 +14,11 @@ export default function LoginScreen() {
   const navigation = useNavigation();
   const passwordRef = useRef();
 
-  const Login = () => {
+  const Login = async() => {
     if (usuario !== "" && contrasena !== "") {
-      if (usuario.toLowerCase() == "federico" && contrasena.toLowerCase() == "gomboc") {
-        navigation.navigate("BlueScreen");
-        setUsuario("");
-        setContrasena("");
+      if (await UsuarioService.login(usuario.toLowerCase(), contrasena.toLowerCase())){
+        await UsuarioService.almacenarCredenciales(usuario, contrasena);
+        navigation.navigate('BlueScreen');
       } else {
         alert("Usuario o contraseña incorrectos");
       }

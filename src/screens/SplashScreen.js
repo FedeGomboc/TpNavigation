@@ -6,25 +6,31 @@ import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import  Boton from "../components/Boton";
 import { ActivityIndicator } from "react-native";
+import UsuarioService from "../services/UsuarioService";
 
 export default function SplashScreen() {
     const navigation = useNavigation();
+    //usuarioService = new UsuarioService()
+    let logueado
+      
+    const logueoAutomatico = async () => {
+        logueado = await UsuarioService.automaticLogin()
+        if (logueado == true){
+            navigation.navigate("BlueScreen")
+        }
+        else {
+            navigation.navigate("LoginScreen")
+        }
+    }
 
     useEffect(() => {
         const onLoad = async () => {
             await new Promise(resolve => setTimeout(resolve, 3000))
-            navigation.navigate("LoginScreen");
-
+            await logueoAutomatico()
         }
         onLoad()
-
-        // automaticLogin()
-        
-        return () => {
-            
-        }
     }, [])
-    
+
     return (
         <View style={styles.container}>
             <ActivityIndicator size="large"/>

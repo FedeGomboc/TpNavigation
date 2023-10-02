@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const USERNAME_KEY = "LOGIN_username";
 const PASSWORD_KEY = "LOGIN_password";
 
-class UsuarioService {
+export default class UsuarioService {
   static login = async (username, password) => {
     //Obtiene las credenciales almacenadas e intenta loguearse
     let isValid;
@@ -26,11 +26,11 @@ class UsuarioService {
       const valorContrasena = await AsyncStorage.getItem(PASSWORD_KEY);
       let isValid
 
-      if (valorUsuario !== null && valorContrasena !== null){
-        isValid = this.login()
+      if (valorUsuario == "federico" && valorContrasena == "gomboc"){
+        isValid = true
       }
       else {
-        return false
+        isValid = false
       }
 
       return isValid
@@ -70,5 +70,3 @@ class UsuarioService {
     return returnValue;
   };
 }
-
-export default UsuarioService;
